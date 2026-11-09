@@ -598,6 +598,8 @@ a { color: inherit; text-decoration: none; }
   width: clamp(170px, 18vw, 250px);
   padding-top: 2.6rem;
   padding-bottom: 4.4rem;
+  overflow: clip;
+  overflow-clip-margin: 40px;
 }
 
 /* projector head */
@@ -719,14 +721,34 @@ a { color: inherit; text-decoration: none; }
 .holo__stage {
   position: relative;
   z-index: 2;
-  animation: holoFlicker 7.5s steps(1, end) infinite;
+  animation: holoFlicker 9s steps(1, end) infinite;
 }
 
 .holo__figure {
   display: block;
   width: 100%;
   height: auto;
-  filter: saturate(1.02) brightness(1.03);
+  animation: holoBreathe 9s ease-in-out infinite;
+}
+
+/* resting = slightly ghosted, periodic peak = crisp */
+@keyframes holoBreathe {
+  0%, 100% {
+    opacity: 0.56;
+    filter: saturate(0.84) brightness(0.86) contrast(0.92) blur(0.4px);
+  }
+  45% {
+    opacity: 1;
+    filter: saturate(1.08) brightness(1.1) contrast(1.08) blur(0);
+  }
+  55% {
+    opacity: 1;
+    filter: saturate(1.1) brightness(1.12) contrast(1.09) blur(0);
+  }
+  84% {
+    opacity: 0.58;
+    filter: saturate(0.85) brightness(0.88) contrast(0.93) blur(0.35px);
+  }
 }
 
 /* scanlines baked to her silhouette so the edge can never go square */
@@ -738,10 +760,9 @@ a { color: inherit; text-decoration: none; }
   pointer-events: none;
   z-index: 3;
   opacity: 0.62;
-  animation: holoRoll 7s linear infinite;
+  animation: holoRoll 9s ease-in-out infinite;
 }
 
-/* bright band travelling down her body */
 /* chromatic echo ghosts trailing at her sides */
 .holo__ghosts {
   position: absolute;
@@ -760,26 +781,26 @@ a { color: inherit; text-decoration: none; }
 }
 
 .holo__ghosts img:nth-child(1) {
-  animation: ghostA 6.4s var(--ease) infinite;
+  animation: ghostA 14s var(--ease) infinite;
 }
 
 .holo__ghosts img:nth-child(2) {
-  animation: ghostB 6.4s var(--ease) infinite;
-  animation-delay: 3.2s;
+  animation: ghostB 14s var(--ease) infinite;
+  animation-delay: 7s;
 }
 
 @keyframes ghostA {
-  0%, 50%, 100% { opacity: 0; transform: translateX(0) scale(1); filter: none; }
-  58% { opacity: 0.42; transform: translateX(-2.6%) scale(1.004); filter: hue-rotate(-16deg) saturate(1.5) brightness(1.18); }
-  70% { opacity: 0.34; transform: translateX(-4.2%) scale(1.008); filter: hue-rotate(-26deg) saturate(1.6) brightness(1.22); }
-  86% { opacity: 0; transform: translateX(-1%) scale(1); filter: none; }
+  0%, 100% { opacity: 0; transform: translateX(0) scale(1); filter: none; }
+  30% { opacity: 0.4; transform: translateX(-2.4%) scale(1.004); filter: hue-rotate(-14deg) saturate(1.45) brightness(1.16); }
+  50% { opacity: 0.4; transform: translateX(-3.4%) scale(1.006); filter: hue-rotate(-20deg) saturate(1.5) brightness(1.19); }
+  72% { opacity: 0; transform: translateX(-1%) scale(1); filter: none; }
 }
 
 @keyframes ghostB {
-  0%, 50%, 100% { opacity: 0; transform: translateX(0) scale(1); filter: none; }
-  58% { opacity: 0.4; transform: translateX(2.6%) scale(1.004); filter: hue-rotate(20deg) saturate(1.45) brightness(1.16); }
-  70% { opacity: 0.32; transform: translateX(4.2%) scale(1.008); filter: hue-rotate(32deg) saturate(1.55) brightness(1.2); }
-  86% { opacity: 0; transform: translateX(1%) scale(1); filter: none; }
+  0%, 100% { opacity: 0; transform: translateX(0) scale(1); filter: none; }
+  30% { opacity: 0.38; transform: translateX(2.4%) scale(1.004); filter: hue-rotate(18deg) saturate(1.4) brightness(1.14); }
+  50% { opacity: 0.38; transform: translateX(3.4%) scale(1.006); filter: hue-rotate(26deg) saturate(1.45) brightness(1.17); }
+  72% { opacity: 0; transform: translateX(1%) scale(1); filter: none; }
 }
 
 /* base: pool of light + rings */
@@ -856,8 +877,8 @@ a { color: inherit; text-decoration: none; }
 }
 
 @keyframes holoRoll {
-  0%, 100% { opacity: 0.5; }
-  50% { opacity: 0.68; }
+  0%, 100% { opacity: 0.58; }
+  50% { opacity: 0.24; }
 }
 
 @keyframes holoRing {
@@ -867,11 +888,9 @@ a { color: inherit; text-decoration: none; }
 }
 
 @keyframes holoFlicker {
-  0%, 96%, 100% { opacity: 1; }
-  96.4% { opacity: 0.76; }
-  96.8% { opacity: 1; }
-  97.4% { opacity: 0.66; }
-  97.8% { opacity: 1; }
+  0%, 97.2%, 100% { opacity: 1; }
+  97.6% { opacity: 0.8; }
+  98% { opacity: 1; }
 }
 
 /* ---------------- avatar ---------------- */
