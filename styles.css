@@ -779,15 +779,17 @@ a { color: inherit; text-decoration: none; }
   mask-image: linear-gradient(90deg, #000 0%, transparent 34%, transparent 66%, #000 100%);
 }
 
-/* 20s cycle: left flashes at 0s, right flashes at 10s.
-   each flash lasts ~1.6s, the rest of the time both are fully absent */
+/* 20s cycle: left flashes at 5s, right flashes at 15s.
+   each flash lasts ~1.6s, the rest of the time both are fully absent.
+   the 5s lead-in keeps the page from opening on a flash */
 .holo__ghosts img:nth-child(1) {
   animation: ghostLeft 20s linear infinite;
+  animation-delay: 5s;
 }
 
 .holo__ghosts img:nth-child(2) {
   animation: ghostRight 20s linear infinite;
-  animation-delay: 10s;
+  animation-delay: 15s;
 }
 
 /* the echo has to clear her silhouette to read as an echo */
