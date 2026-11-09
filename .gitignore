@@ -1,0 +1,13 @@
+# OS / editor junk
+.DS_Store
+Thumbs.db
+*.swp
+*~
+
+# playwright / test artefacts
+.playwright-cli/
+.playwright-mcp/
+*.log
+
+# local dev server overrides
+.htaccess
